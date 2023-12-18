@@ -3219,13 +3219,13 @@ function umfpack_toc(stats)
     @ccall libumfpack.umfpack_toc(stats::Ptr{Cdouble})::Cvoid
 end
 
-const CHOLMOD_DATE = "June 16, 2023"
+const CHOLMOD_DATE = "October 23, 2023"
 
-const CHOLMOD_MAIN_VERSION = 4
+const CHOLMOD_MAIN_VERSION = 5
 
 const CHOLMOD_SUB_VERSION = 0
 
-const CHOLMOD_SUBSUB_VERSION = 4
+const CHOLMOD_SUBSUB_VERSION = 0
 
 const _FILE_OFFSET_BITS = 64
 
