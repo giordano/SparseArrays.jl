@@ -944,7 +944,16 @@ end
     @testset "user-specified permutation" begin
         n = 100
         A = sprand(n,n,5/n) |> t -> t't + I
-        F = CHOLMOD.symbolic(CHOLMOD.Sparse(A); perm=1:n)
+
+        SA = CHOLMOD.Sparse(A)
+        F = CHOLMOD.@cholmod_param postorder = false begin
+            CHOLMOD.@cholmod_param nmethods = 1 begin
+                CHOLMOD.analyze_p(SA, Int[p-1 for p in 1:n])
+            end
+        end
+        @show F.p
+        @test length(F.p) == n
+        F = CHOLMOD.symbolic(SA; perm=1:n)
         @show F.p
         @test length(F.p) == n
         cholesky!(F, A)
